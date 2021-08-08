@@ -1,6 +1,5 @@
 <template>
   <div class="login-content">
-    <div class="login-bg" id="loginBgId"></div>
     <div class="login-form">
       <h1>LOGIN</h1>
       <Form ref="formInline" :model="formInline" :rules="ruleInline">
@@ -25,6 +24,25 @@
         </FormItem>
       </Form>
     </div>
+     <vue-particles
+        color="#fff"
+        :particleOpacity="0.7"
+        :particlesNumber="60"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#0119d6"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="2"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push"
+        class="lizi login-bg"
+      >
+      </vue-particles>
   </div>
 </template>
 

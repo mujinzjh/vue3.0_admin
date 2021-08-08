@@ -9,6 +9,10 @@ import 'view-design/dist/styles/iview.css';
 import '../static/css/main.css';
 // import "@/assets/theme/t.less ";
 
+// 使用粒子特效插件
+import VueParticles from "vue-particles";
+Vue.use(VueParticles);
+
 Vue.use(ViewUI); //使用iviewUI框架
 
 Vue.config.productionTip = false
