@@ -1,29 +1,9 @@
 <template>
   <div class="layout">
     <Layout class="home-content">
-      <Header>
-        <Menu mode="horizontal" theme="dark" active-name="1">
-          <div class="layout-logo"></div>
-          <div class="layout-nav">
-            <MenuItem name="1">
-              <Icon type="ios-navigate"></Icon>
-              Item 1
-            </MenuItem>
-            <MenuItem name="2">
-              <Icon type="ios-keypad"></Icon>
-              Item 2
-            </MenuItem>
-            <MenuItem name="3">
-              <Icon type="ios-analytics"></Icon>
-              Item 3
-            </MenuItem>
-            <MenuItem name="4">
-              <Icon type="ios-paper"></Icon>
-              Item 4
-            </MenuItem>
-          </div>
-        </Menu>
-      </Header>
+      <!-- <Header> -->
+       <vHeader/> 
+      <!-- </Header> -->
       <Layout>
         <Sider hide-trigger :style="{ background: '#fff' }">
           <Menu
@@ -31,6 +11,7 @@
             theme="light"
             width="auto"
             :open-names="['1']"
+            accordion
           >
             <Submenu name="1">
               <template slot="title">
@@ -74,7 +55,14 @@
   </div>
 </template>
 <script>
-export default {};
+import vHeader from "./header.vue";
+import vSlider from "./slide.vue";
+export default {
+  components:{
+   vHeader,
+   vSlider 
+  }
+};
 </script>
 
 <style scoped lang="less">
