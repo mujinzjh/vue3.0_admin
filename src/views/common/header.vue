@@ -5,6 +5,7 @@
       <span>{{ projectName }}</span>
     </div>
     <div class="right">
+      <Avatar icon="ios-person" size="small" />
       <Dropdown>
         <a href="javascript:void(0)">
           {{ userName }}
