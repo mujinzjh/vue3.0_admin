@@ -18,31 +18,34 @@
           </Input>
         </FormItem>
         <FormItem>
-          <Button type="primary" @click="handleSubmit('formInline')" class="form-submit"
+          <Button
+            type="primary"
+            @click="handleSubmit('formInline')"
+            class="form-submit"
             >登录</Button
           >
         </FormItem>
       </Form>
     </div>
-     <vue-particles
-        color="#fff"
-        :particleOpacity="0.7"
-        :particlesNumber="60"
-        shapeType="circle"
-        :particleSize="4"
-        linesColor="#0119d6"
-        :linesWidth="1"
-        :lineLinked="true"
-        :lineOpacity="0.4"
-        :linesDistance="150"
-        :moveSpeed="2"
-        :hoverEffect="true"
-        hoverMode="grab"
-        :clickEffect="true"
-        clickMode="push"
-        class="lizi login-bg"
-      >
-      </vue-particles>
+    <vue-particles
+      color="#fff"
+      :particleOpacity="0.7"
+      :particlesNumber="60"
+      shapeType="circle"
+      :particleSize="4"
+      linesColor="#0119d6"
+      :linesWidth="1"
+      :lineLinked="true"
+      :lineOpacity="0.4"
+      :linesDistance="150"
+      :moveSpeed="2"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+      class="lizi login-bg"
+    >
+    </vue-particles>
   </div>
 </template>
 
@@ -93,32 +96,32 @@ export default {
     return {
       formInline: {
         user: "",
-        password: ""
+        password: "",
       },
       ruleInline: {
         user: [
           {
             required: true,
             message: "Please fill in the user name",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         password: [
           {
             required: true,
             message: "Please fill in the password.",
-            trigger: "blur"
+            trigger: "blur",
           },
           {
             type: "string",
             min: 6,
             message: "The password length cannot be less than 6 bits",
-            trigger: "blur"
-          }
-        ]
+            trigger: "blur",
+          },
+        ],
       },
       timer: null,
-      imgCount: 0
+      imgCount: 0,
     };
   },
   mounted() {
@@ -145,9 +148,22 @@ export default {
     // }, 3000);
     // },
     handleSubmit(name) {
-      this.$refs[name].validate(valid => {
+      this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$router.push('Home');
+          // this.$router.push('Home');
+          this.$axios
+            .get("/api/login", {
+              params: {
+                username: this.formInline.user,
+                password: this.formInline.password,
+              },
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         } else {
           this.$Message.error("Fail!");
         }
@@ -155,8 +171,8 @@ export default {
     },
     handleReset(name) {
       this.$refs[name].resetFields();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -178,9 +194,9 @@ export default {
 .login-form {
   color: #fff;
   width: 400px;
-//   height: 300px;
+  //   height: 300px;
   position: absolute;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   left: 50%;
   top: 50%;
   margin: -150px 0 0 -200px;
@@ -196,8 +212,8 @@ export default {
     border: none;
     background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   }
-  .form-submit:focus{
-      box-shadow: none;
+  .form-submit:focus {
+    box-shadow: none;
   }
 }
 </style>

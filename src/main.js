@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import axios from 'axios'
 import router from './router'
 //引入iview
 import ViewUI from 'view-design';
@@ -19,7 +20,7 @@ Vue.use(VueParticles);
 Vue.use(ViewUI); //使用iviewUI框架
 
 Vue.config.productionTip = false
-
+Vue.prototype.$axios = axios;
 //新增事件总线机制eventBus
 window.EventBus = new Vue();
 
