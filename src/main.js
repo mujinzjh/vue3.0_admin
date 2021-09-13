@@ -9,6 +9,11 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import '../static/css/main.css';
 // import "@/assets/theme/t.less ";
+
+//引入工具方法
+import utils from "./utils/utils";
+Vue.prototype.$utils = utils;
+
 // 引入基础配置
 import baseConfig from "../static/baseConfig/index";
 window.$baseConfig = baseConfig;
