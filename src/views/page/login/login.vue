@@ -150,20 +150,12 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          // this.$router.push('Home');
-          this.$axios
-            .get("/api/login", {
-              params: {
-                username: this.formInline.user,
-                password: this.formInline.password,
-              },
-            })
+          this.$store
+            .dispatch("login", this.formInline)
             .then((res) => {
               this.$router.push("/home");
             })
-            .catch((err) => {
-              console.log(err);
-            });
+            .catch((err) => {});
         } else {
           this.$Message.error("Fail!");
         }

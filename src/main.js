@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import axios from 'axios'
 import router from './router'
+
 //引入iview
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
@@ -24,7 +25,8 @@ Vue.use(VueParticles);
 
 Vue.use(ViewUI); //使用iviewUI框架
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+import store from "./store/index";
 Vue.prototype.$axios = axios;
 //新增事件总线机制eventBus
 window.EventBus = new Vue();
@@ -33,6 +35,7 @@ window.EventBus = new Vue();
 new Vue({
     el: '#app',
     router,
+    store,
     components: { App },
     template: '<App/>'
 })
