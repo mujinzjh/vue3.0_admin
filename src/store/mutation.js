@@ -1,5 +1,4 @@
 import utils from '../utils/utils'
-console.log(utils);
 const mutations = {
   SET_TOKEN: (state, token) => {
     debugger
