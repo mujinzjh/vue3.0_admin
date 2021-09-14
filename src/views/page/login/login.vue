@@ -153,6 +153,7 @@ export default {
           this.$store
             .dispatch("login", this.formInline)
             .then((res) => {
+              console.log(res);
               this.$router.push("/home");
             })
             .catch((err) => {});

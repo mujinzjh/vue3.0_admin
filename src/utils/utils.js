@@ -23,14 +23,15 @@ utils.prototype = {
  */
    encrypt(value,keyStr,ivStr){
     if (value!==null) {
-      const key = Crypto.enc.Utf8.parse(keyStr),
-      iv = Crypto.enc.Utf8.parse(ivStr || '0102030405060708'),
-      srcs = Crypto.enc.Utf8.parse(value),
-      encrypted = Crypto.AES.encrypt(srcs,key,{
+      const key = Crypto.enc.Utf8.parse(keyStr);
+     const iv = Crypto.enc.Utf8.parse(ivStr || '0102030405060708');
+      const srcs = Crypto.enc.Utf8.parse(value);
+      console.log(Crypto);
+      const encrypted = Crypto.AES.encrypt(srcs,key,{
         iv:iv,
         mode:Crypto.mode.CBC,
-        padding:Crypto.padding.Pkcs7
-      })
+        padding:Crypto.pad.Pkcs7
+      });
       return Crypto.enc.Base64.stringify(encrypted.ciphertext);
     } else {
       return value;
@@ -52,7 +53,7 @@ utils.prototype = {
         iv:iv,
         mode:Crypto.mode.CBC,
         padding:Crypto.padding.Pkcs7
-      })
+      });
       return Crypto.enc.Utf8.stringify(decrypt).toString();
     } else {
       return value;

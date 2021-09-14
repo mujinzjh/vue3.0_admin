@@ -3,10 +3,7 @@ import axios from 'axios';
 import utils from '../utils/utils'
 import store from '../store/index'
 import qs from 'qs';
-
-
-const baseURL = '/api';
-let axiosHttpUtils;
+import Constans from '../config/constans';
 
 
 axios.interceptors.request.use(config => {
@@ -46,21 +43,22 @@ const handleHeader = (opts) => {
 
 const handleOptions = (opts, baseURL, data) => {
   let publicParams = {},
-  defaultHeader = handleHeader(opts),
-  httpDefaultOpts = {
-    method: opts.method,
-    baseURL,
-    timeout: opts.timeout || 10000,
-    headers: defaultHeader,
-    responseType: opts.responseType || ''
-  }
-
-    if (opts.method.toUpperCase() === 'GET' || opts.method.toUpperCase() === 'DELETE') {
-      httpDefaultOpts.params = Object.assign(publicParams,data);
-    } else {
-      httpDefaultOpts.data = handleParamData(defaultHeader,data)
+    defaultHeader = handleHeader(opts),
+    httpDefaultOpts = {
+      method: opts.method,
+      baseURL,
+      url: opts.url,
+      timeout: opts.timeout || 10000,
+      headers: defaultHeader,
+      responseType: opts.responseType || ''
     }
-  
+
+  if (opts.method.toUpperCase() === 'GET' || opts.method.toUpperCase() === 'DELETE') {
+    httpDefaultOpts.params = Object.assign(publicParams, data);
+  } else {
+    httpDefaultOpts.data = handleParamData(defaultHeader, data)
+  }
+  return httpDefaultOpts;
 
 }
 
@@ -73,24 +71,24 @@ const isParamsVaild = (params) => {
 }
 
 function axiosHttpUtils(opts, data) {
-  let baseURL = opts.baseURL || baseURL, promise;
+  let baseURL = opts.baseURL || Constans.BASE_URL, promise;
   const httpDefaultOpts = handleOptions(opts, baseURL, data);
 
-  promise = new Promise((resolve,reject)=>{
+  promise = new Promise((resolve, reject) => {
     if (!isParamsVaild(opts)) {
       return false;
     }
-    axios(httpDefaultOpts).then(response=>{
-      const {res} = response.data;
+    axios(httpDefaultOpts).then(response => {
+      const res = response.data;
       if (res.code === 200) {
         resolve(res);
-      }else if (res.code === 401) {
+      } else if (res.code === 401) {
         vue.$router.push('/');
         sessionStorage.clear();
-      }else {
+      } else {
         reject(res);
       }
-    }).catch(err=>{
+    }).catch(err => {
       reject(err);
     })
   });
