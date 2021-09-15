@@ -1,7 +1,6 @@
 import utils from '../utils/utils'
 const mutations = {
   SET_TOKEN: (state, token) => {
-    debugger
     state.token = token;
     utils.setSessionItem('token', token);
   },
