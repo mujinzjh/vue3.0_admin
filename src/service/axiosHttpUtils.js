@@ -7,8 +7,9 @@ import Constans from '../config/constans';
 
 
 axios.interceptors.request.use(config => {
-  if (store.state.token) {
-    config.headers['Authorization'] = utils.getSessionItem('token');
+  const token = utils.getSessionItem('token');
+  if (token) {
+    config.headers['Authorization'] = token;
   }
   return config;
 }, err => {

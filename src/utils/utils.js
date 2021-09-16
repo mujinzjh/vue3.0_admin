@@ -1,7 +1,13 @@
+/*
+ * @Author: mujin
+ * @Date: 2021-09-13 17:01:28
+ * @LastEditTime: 2021-09-16 15:08:43
+ * @Description: axios封装的配置文件
+ */
 import Crypto from "crypto-js/crypto-js";
 import Moment from "moment";
 
-function utils(){}
+function utils() { }
 
 utils.prototype = {
   /**
@@ -10,9 +16,9 @@ utils.prototype = {
    * @param {*} type 
    * @returns 
    */
-  setDateFormater(value,type){
+  setDateFormater(value, type) {
     const _dateType = type || 'YYYY-MM-DD HH:mm:ss';
-    return moment(value).format(_dateType);
+    return Moment(value).format(_dateType);
   },
   /**
  * @method AES加密
@@ -21,16 +27,16 @@ utils.prototype = {
  * @param {*} iv 
  * @return 返回base64
  */
-   encrypt(value,keyStr,ivStr){
-    if (value!==null) {
+  encrypt(value, keyStr, ivStr) {
+    if (value !== null) {
       const key = Crypto.enc.Utf8.parse(keyStr);
-     const iv = Crypto.enc.Utf8.parse(ivStr || '0102030405060708');
+      const iv = Crypto.enc.Utf8.parse(ivStr || '0102030405060708');
       const srcs = Crypto.enc.Utf8.parse(value);
       console.log(Crypto);
-      const encrypted = Crypto.AES.encrypt(srcs,key,{
-        iv:iv,
-        mode:Crypto.mode.CBC,
-        padding:Crypto.pad.Pkcs7
+      const encrypted = Crypto.AES.encrypt(srcs, key, {
+        iv: iv,
+        mode: Crypto.mode.CBC,
+        padding: Crypto.pad.Pkcs7
       });
       return Crypto.enc.Base64.stringify(encrypted.ciphertext);
     } else {
@@ -43,17 +49,17 @@ utils.prototype = {
    * @param {*} keyStr 
    * @param {*} ivStr 
    */
-  decrypt(value,keyStr,ivStr){
-    if (value!==null) {
+  decrypt(value, keyStr, ivStr) {
+    if (value !== null) {
       const key = Crypto.enc.Utf8.parse(keyStr),
-      iv = Crypto.enc.Utf8.parse(ivStr || '0102030405060708'),
-      base64 = Crypto.enc.Base64.parse(value),
-      src = Crypto.enc.Base64.stringify(base64),
-      decrypt = Crypto.AES.decrypt(src,key,{
-        iv:iv,
-        mode:Crypto.mode.CBC,
-        padding:Crypto.padding.Pkcs7
-      });
+        iv = Crypto.enc.Utf8.parse(ivStr || '0102030405060708'),
+        base64 = Crypto.enc.Base64.parse(value),
+        src = Crypto.enc.Base64.stringify(base64),
+        decrypt = Crypto.AES.decrypt(src, key, {
+          iv: iv,
+          mode: Crypto.mode.CBC,
+          padding: Crypto.pad.Pkcs7
+        });
       return Crypto.enc.Utf8.stringify(decrypt).toString();
     } else {
       return value;
@@ -64,16 +70,16 @@ utils.prototype = {
    * @param {*} key 
    * @param {*} value 
    */
-  setSessionItem(key,value){
-    sessionStorage.setItem(key,this.encrypt(value,'a1b2c3d4e5f6g7h8'));
+  setSessionItem(key, value) {
+    sessionStorage.setItem(key, this.encrypt(value, 'a1b2c3d4e5f6g7h8'));
   },
   /**
    * @method 获取加密session信息
    * @param {*} key 
    * @returns 
    */
-  getSessionItem(key){
-    return this.decrypt(sessionStorage.getItem(key),'a1b2c3d4e5f6g7h8');
+  getSessionItem(key) {
+    return this.decrypt(sessionStorage.getItem(key), 'a1b2c3d4e5f6g7h8');
   }
 }
 
