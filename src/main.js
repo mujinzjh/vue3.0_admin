@@ -31,11 +31,14 @@ Vue.prototype.$axios = axios;
 //新增事件总线机制eventBus
 window.EventBus = new Vue();
 
+/*引入国际化配置文件*/
+import i18n from './locale';
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
     store,
+    i18n,
     components: { App },
     template: '<App/>'
 })
