@@ -2,10 +2,21 @@
   <div class="login-content">
     <div class="login-form">
       <h1>LOGIN</h1>
-      <Form ref="formInline" :model="formInline" :rules="ruleInline">
+      <Form
+        ref="formInline"
+        :model="formInline"
+        :rules="ruleInline"
+      >
         <FormItem prop="user">
-          <Input type="text" v-model="formInline.user" placeholder="Username">
-            <Icon type="ios-person-outline" slot="prepend"></Icon>
+          <Input
+            type="text"
+            v-model="formInline.user"
+            placeholder="Username"
+          >
+          <Icon
+            type="ios-person-outline"
+            slot="prepend"
+          ></Icon>
           </Input>
         </FormItem>
         <FormItem prop="password">
@@ -14,7 +25,10 @@
             v-model="formInline.password"
             placeholder="Password"
           >
-            <Icon type="ios-lock-outline" slot="prepend"></Icon>
+          <Icon
+            type="ios-lock-outline"
+            slot="prepend"
+          ></Icon>
           </Input>
         </FormItem>
         <FormItem>
@@ -22,8 +36,7 @@
             type="primary"
             @click="handleSubmit('formInline')"
             class="form-submit"
-            >登录</Button
-          >
+          >登录</Button>
         </FormItem>
       </Form>
     </div>
@@ -154,9 +167,9 @@ export default {
             .dispatch("login", this.formInline)
             .then((res) => {
               console.log(res);
-              this.$router.push("/home");
+              this.$router.push("/index");
             })
-            .catch((err) => {});
+            .catch((err) => { });
         } else {
           this.$Message.error("Fail!");
         }
@@ -174,7 +187,7 @@ export default {
   width: 100%;
   height: 100%;
   .login-bg {
-    background-image: url("../../../assets/img/2.jpg");
+    background-image: url('../../../assets/img/2.jpg');
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;

@@ -1,16 +1,23 @@
+<!--
+ * @Author: mujin
+ * @Date: 2021-08-08 21:39:54
+ * @LastEditTime: 2021-10-01 13:26:08
+ * @Description: 
+-->
 <template>
   <div class="layout">
-    <Layout class="home-content">
-       <vHeader/> 
-      <Layout>
-        <Sider hide-trigger :style="{ background: '#fff' }">
-          <vSlider/>
-        </Sider>
-        <Layout :style="{ padding: '0 24px 24px' }">
-          <Content :style="{marginTop:'24px', background: '#fff' }">
-            <router-view></router-view>
-          </Content>
-        </Layout>
+    <vHeader />
+    <Layout>
+      <Sider
+        hide-trigger
+        :style="{ background: '#fff' }"
+      >
+        <vSlider />
+      </Sider>
+      <Layout class="wrap-content">
+        <Content class="main-wrap-content">
+          <router-view></router-view>
+        </Content>
       </Layout>
     </Layout>
   </div>
@@ -19,9 +26,9 @@
 import vHeader from "./header.vue";
 import vSlider from "./slide.vue";
 export default {
-  components:{
-   vHeader,
-   vSlider 
+  components: {
+    vHeader,
+    vSlider
   }
 };
 </script>
@@ -34,8 +41,16 @@ export default {
   border-radius: 4px;
   overflow: hidden;
   height: 100%;
-  .home-content {
-    height: inherit;
+  /deep/ .ivu-layout-has-sider {
+    height: calc(100% - 64px);
+  }
+  .wrap-content {
+    padding: 0 24px;
+    overflow: auto;
+  }
+  .main-wrap-content {
+    background: #fff;
+    margin: 16px 0;
   }
 }
 

@@ -1,3 +1,13 @@
+/*
+ * @Author: mujin
+ * @Date: 2021-08-08 21:39:54
+ * @LastEditTime: 2021-10-01 14:21:23
+ * @Description: 
+ */
+
+/**
+ * 注意：菜单书写时父子菜单时，子菜单的应该带上父菜单的name
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -24,7 +34,6 @@ const route = [{
     path: '/home',
     name: 'Home',
     component: Home,
-    redirect: '/index',
     children: [{
         path: '/index',
         name: 'index',
@@ -37,7 +46,7 @@ const route = [{
         }
     },
     {
-        path: '/index/component',
+        path: '/component',
         name: 'component',
         component: resolve => require(['@/views/page/component/index.vue'], resolve),
         meta: {
@@ -47,7 +56,7 @@ const route = [{
             access: [accessList._super, accessList._admin, accessList._ordinary]
         },
         children: [{
-            path: '/index/component/component1',
+            path: '/component/component1',
             name: 'component1',
             component: resolve => require(['@/views/page/component/component1/index.vue'], resolve),
             meta: {
@@ -58,7 +67,7 @@ const route = [{
             },
         },
         {
-            path: '/index/component/component2',
+            path: '/component/component2',
             name: 'component2',
             component: resolve => require(['@/views/page/component/component2/index.vue'], resolve),
             meta: {
