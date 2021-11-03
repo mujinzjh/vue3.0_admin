@@ -1,8 +1,8 @@
 <!--
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-10-01 14:22:57
- * @Description: 
+ * @LastEditTime: 2021-10-29 14:18:53
+ * @Description:
 -->
 <template>
   <div class="slider">
@@ -53,21 +53,21 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       openName: []
     };
   },
-  created() {
+  created () {
     this.isIncludeOpen();
   },
   methods: {
     /**
-     * @method: 
+     * @method:
      * @param {*}
      * @return {*}
      */
-    isIncludeOpen() {
+    isIncludeOpen () {
       const path = this.$route.path;
       const openName = JSON.parse(sessionStorage.getItem('openName'));
       const openValue = openName && openName[0];
@@ -80,23 +80,22 @@ export default {
     /**
      * @method 菜单路由跳转
      */
-    navigateTo(name) {
+    navigateTo (name) {
       this.$router.push({ name });
     },
-    onOpenChange(value) {
-      this.openName = value
+    onOpenChange (value) {
+      this.openName = value;
       sessionStorage.setItem('openName', JSON.stringify(value));
-
-    },
+    }
   },
   computed: {
-    menus() {
+    menus () {
       return this.$router.options.routes[1].children;
     },
-    activeName() {
+    activeName () {
       return this.$route.name;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -63,42 +63,42 @@
 </template>
 
 <script>
-import firstImg from "@/assets/img/1.jpg";
-import secondImg from "@/assets/img/2.jpg";
-import thirdImg from "@/assets/img/bg.jpg";
+import firstImg from '@/assets/img/1.jpg';
+import secondImg from '@/assets/img/2.jpg';
+import thirdImg from '@/assets/img/bg.jpg';
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("Please enter your password"));
+      if (value === '') {
+        callback(new Error('Please enter your password'));
       } else {
-        if (this.formCustom.passwdCheck !== "") {
+        if (this.formCustom.passwdCheck !== '') {
           // 对第二个密码框单独验证
-          this.$refs.formCustom.validateField("passwdCheck");
+          this.$refs.formCustom.validateField('passwdCheck');
         }
         callback();
       }
     };
     const validatePassCheck = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("Please enter your password again"));
+      if (value === '') {
+        callback(new Error('Please enter your password again'));
       } else if (value !== this.formCustom.passwd) {
-        callback(new Error("The two input passwords do not match!"));
+        callback(new Error('The two input passwords do not match!'));
       } else {
         callback();
       }
     };
     const validateAge = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error("Age cannot be empty"));
+        return callback(new Error('Age cannot be empty'));
       }
       // 模拟异步验证效果
       setTimeout(() => {
         if (!Number.isInteger(value)) {
-          callback(new Error("Please enter a numeric value"));
+          callback(new Error('Please enter a numeric value'));
         } else {
           if (value < 18) {
-            callback(new Error("Must be over 18 years of age"));
+            callback(new Error('Must be over 18 years of age'));
           } else {
             callback();
           }
@@ -108,33 +108,33 @@ export default {
 
     return {
       formInline: {
-        user: "",
-        password: "",
+        user: '',
+        password: ''
       },
       ruleInline: {
         user: [
           {
             required: true,
-            message: "Please fill in the user name",
-            trigger: "blur",
-          },
+            message: 'Please fill in the user name',
+            trigger: 'blur'
+          }
         ],
         password: [
           {
             required: true,
-            message: "Please fill in the password.",
-            trigger: "blur",
+            message: 'Please fill in the password.',
+            trigger: 'blur'
           },
           {
-            type: "string",
+            type: 'string',
             min: 6,
-            message: "The password length cannot be less than 6 bits",
-            trigger: "blur",
-          },
-        ],
+            message: 'The password length cannot be less than 6 bits',
+            trigger: 'blur'
+          }
+        ]
       },
       timer: null,
-      imgCount: 0,
+      imgCount: 0
     };
   },
   mounted() {
@@ -164,21 +164,21 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$store
-            .dispatch("login", this.formInline)
+            .dispatch('login', this.formInline)
             .then((res) => {
               console.log(res);
-              this.$router.push("/index");
+              this.$router.push('/index');
             })
             .catch((err) => { });
         } else {
-          this.$Message.error("Fail!");
+          this.$Message.error('Fail!');
         }
       });
     },
     handleReset(name) {
       this.$refs[name].resetFields();
-    },
-  },
+    }
+  }
 };
 </script>
 

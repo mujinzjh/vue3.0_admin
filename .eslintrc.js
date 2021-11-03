@@ -1,3 +1,9 @@
+/*
+ * @Author: mujin
+ * @Date: 2021-08-08 21:39:54
+ * @LastEditTime: 2021-10-29 14:21:13
+ * @Description: 
+ */
 // https://eslint.org/docs/user-guide/configuring
 
 module.exports = {
@@ -11,10 +17,11 @@ module.exports = {
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential', 
+    'plugin:vue/essential',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
     'standard'
   ],
+
   // required to lint *.vue files
   plugins: [
     'vue'
@@ -24,6 +31,7 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "semi": ["error", "always"],
   }
 }
