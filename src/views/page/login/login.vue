@@ -7,10 +7,10 @@
         :model="formInline"
         :rules="ruleInline"
       >
-        <FormItem prop="user">
+        <FormItem prop="account">
           <Input
             type="text"
-            v-model="formInline.user"
+            v-model="formInline.account"
             placeholder="Username"
           >
           <Icon
@@ -108,14 +108,14 @@ export default {
 
     return {
       formInline: {
-        user: '',
+        account: '',
         password: ''
       },
       ruleInline: {
-        user: [
+        account: [
           {
             required: true,
-            message: 'Please fill in the user name',
+            message: 'Please fill in the account name',
             trigger: 'blur'
           }
         ],
@@ -166,7 +166,6 @@ export default {
           this.$store
             .dispatch('login', this.formInline)
             .then((res) => {
-              console.log(res);
               this.$router.push('/index');
             })
             .catch((err) => { });

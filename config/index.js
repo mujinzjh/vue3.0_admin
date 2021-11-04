@@ -1,3 +1,9 @@
+/*
+ * @Author: mujin
+ * @Date: 2021-08-08 21:39:54
+ * @LastEditTime: 2021-11-03 17:34:31
+ * @Description: 
+ */
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
@@ -12,9 +18,9 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8080/',   // target表示代理的服务器url
+        target: 'http://127.0.0.1:8081/',   // target表示代理的服务器url
         pathRewrite: {     // pathRewrite表示路径重写，key表示一个正则，value表示别名 
-          '^/api': '/api'   // 即用 '/api'表示'http://localhost:3000/api'
+          '^/api': '/'   // 即用 '/api'表示'http://localhost:3000/api'
         }
       }
     },

@@ -1,10 +1,15 @@
-import vue from 'vue'
+/*
+ * @Author: mujin
+ * @Date: 2021-09-13 23:05:33
+ * @LastEditTime: 2021-11-03 17:44:11
+ * @Description:
+ */
+import vue from 'vue';
 import axios from 'axios';
-import utils from '../utils/utils'
-import store from '../store/index'
+import utils from '../utils/utils';
+import store from '../store/index';
 import qs from 'qs';
 import Constans from '../config/constans';
-
 
 axios.interceptors.request.use(config => {
   const token = utils.getSessionItem('token');
@@ -14,7 +19,7 @@ axios.interceptors.request.use(config => {
   return config;
 }, err => {
   return Promise.reject(err);
-})
+});
 
 axios.interceptors.response.use(res => {
   return res;
@@ -38,9 +43,8 @@ const handleHeader = (opts) => {
       'Content-Type': 'application/json;charset=UTF-8'
     };
   }
-  return defaultHeader
-}
-
+  return defaultHeader;
+};
 
 const handleOptions = (opts, baseURL, data) => {
   let publicParams = {},
@@ -52,24 +56,23 @@ const handleOptions = (opts, baseURL, data) => {
       timeout: opts.timeout || 10000,
       headers: defaultHeader,
       responseType: opts.responseType || ''
-    }
+    };
 
   if (opts.method.toUpperCase() === 'GET' || opts.method.toUpperCase() === 'DELETE') {
     httpDefaultOpts.params = Object.assign(publicParams, data);
   } else {
-    httpDefaultOpts.data = handleParamData(defaultHeader, data)
+    httpDefaultOpts.data = handleParamData(defaultHeader, data);
   }
   return httpDefaultOpts;
-
-}
+};
 
 const handleParamData = (defaultHeader, data) => {
   return defaultHeader && defaultHeader['Content-Type'] === 'applicaation/x-www-form-urlencoded' ? qs.stringify(data) : data;
-}
+};
 
 const isParamsVaild = (params) => {
   return Boolean(params.method && params.url);
-}
+};
 
 function axiosHttpUtils(opts, data) {
   let baseURL = opts.baseURL || Constans.BASE_URL, promise;
@@ -81,9 +84,9 @@ function axiosHttpUtils(opts, data) {
     }
     axios(httpDefaultOpts).then(response => {
       const res = response.data;
-      if (res.code === 200) {
+      if (res.code == 200) {
         resolve(res);
-      } else if (res.code === 401) {
+      } else if (res.code == 401) {
         vue.$router.push('/');
         sessionStorage.clear();
       } else {
@@ -91,7 +94,7 @@ function axiosHttpUtils(opts, data) {
       }
     }).catch(err => {
       reject(err);
-    })
+    });
   });
   return promise;
 }
