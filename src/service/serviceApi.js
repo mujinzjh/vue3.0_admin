@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-09-13 23:47:10
- * @LastEditTime: 2021-11-03 17:23:53
+ * @LastEditTime: 2021-11-13 17:23:26
  * @Description: 接口配置文件
  */
 
@@ -17,8 +17,8 @@ const serviceApi = {
   },
   /** 登出 */
   'logout': {
-    url: '/hms/logout',
-    method: 'get',
+    url: '/hms/logOut',
+    method: 'post',
     header: {
       'Accept': 'application/json',
       'Content-Type': 'application/json;charset=UTF-8'
@@ -26,8 +26,16 @@ const serviceApi = {
   },
   /** 修改密码 */
   'updatePwd': {
-    url: '/user/changePass',
-    method: 'PUT',
+    url: '/hms/updatePwd',
+    method: 'post',
+    header: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  },
+  'syslog': {
+    url: '/hms/log/sysLog',
+    method: 'get',
     header: {
       'Accept': 'application/json',
       'Content-Type': 'application/json;charset=UTF-8'

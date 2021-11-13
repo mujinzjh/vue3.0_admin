@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-09-13 23:05:33
- * @LastEditTime: 2021-11-03 17:44:11
+ * @LastEditTime: 2021-11-13 17:37:13
  * @Description:
  */
 import vue from 'vue';
@@ -14,7 +14,7 @@ import Constans from '../config/constans';
 axios.interceptors.request.use(config => {
   const token = utils.getSessionItem('token');
   if (token) {
-    config.headers['Authorization'] = token;
+    config.headers['token'] = token;
   }
   return config;
 }, err => {
@@ -84,13 +84,10 @@ function axiosHttpUtils(opts, data) {
     }
     axios(httpDefaultOpts).then(response => {
       const res = response.data;
-      if (res.code == 200) {
-        resolve(res);
-      } else if (res.code == 401) {
-        vue.$router.push('/');
-        sessionStorage.clear();
+      if (res.code == 401) {
+        EventBus.$emit('logout');
       } else {
-        reject(res);
+        resolve(res);
       }
     }).catch(err => {
       reject(err);

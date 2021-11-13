@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-10-01 14:21:23
+ * @LastEditTime: 2021-11-13 16:53:18
  * @Description: 
  */
 
@@ -13,8 +13,8 @@ import Router from 'vue-router'
 
 import Constans from '@/config/constans.js';
 
-import Utils from "@/config/utils.js";
-
+import Utils from "@/utils/utils.js";
+import RouterUtils from '@/config/utils'
 const accessList = Constans.accessList; //获取权限列表，
 
 
@@ -26,14 +26,15 @@ const Login = resolve => require(['@/views/page/login/login.vue'], resolve);
 //meta 元信息中包含图标及菜单名称，以及是否是隐藏当前组件
 
 const route = [{
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
 },
 {
     path: '/home',
-    name: 'Home',
+    name: 'home',
     component: Home,
+    redirect: '/index',
     children: [{
         path: '/index',
         name: 'index',
@@ -79,6 +80,22 @@ const route = [{
         }
         ]
     },
+    {
+        path: '/systemManager',
+        name: 'systemManager',
+        component: resolve => require(['@/views/page/systemManger/index.vue'], resolve),
+        children: [{
+            path: '/systemManager/userManager',
+            name: 'userManager',
+            component: resolve => require(['@/views/page/systemManger/userList.vue'], resolve),
+        },
+        {
+            path: '/systemManager/roleManager',
+            name: 'roleManager',
+            component: resolve => require(['@/views/page/systemManger/roleList.vue'], resolve),
+        }
+        ]
+    },
     ]
 }
 ]
@@ -91,19 +108,24 @@ const _router = new Router({
 // 进行路由防守
 
 const LOGINPATH = 'Login';
+_router.beforeEach((to, from, next) => {
+    const menuList = Utils.getSessionItem('menus') || [], token = Utils.getSessionItem('token') || '';
+    if (to.path == '/') {
+        next({ name: LOGINPATH });
+    } else {
+        if (to.name === LOGINPATH) {
+            next();
+        } else if (!token) {
+            next({ name: LOGINPATH });
+        }
+        else if (Utils.isAccessTo(menuList, to.name)) {
+            next();
+        }
+        else {
+            next({ name: LOGINPATH });
+        }
+    }
 
-// _router.beforeEach((to, from, next) => {
-//     const token = sessionStorage.getItem('token');
-//     const access = sessionStorage.getItem('access');
-//     if (to.name === LOGINPATH) {
-//         next();
-//     } else if (!token) {
-//         next({ name: LOGINPATH });
-//     } else if (Utils.isAccess(to.name, access, route)) {
-//         next()
-//     } else {
-//         next({ name: LOGINPATH });
-//     }
-// });
+});
 
 export default _router;

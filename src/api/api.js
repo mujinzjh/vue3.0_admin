@@ -1,11 +1,11 @@
 /*
  * @Author: mujin
  * @Date: 2021-09-13 23:48:59
- * @LastEditTime: 2021-09-16 17:17:13
- * @Description: 
+ * @LastEditTime: 2021-11-09 15:27:29
+ * @Description:
  */
-import axiosHttpUtil from "../service/axiosHttpUtils";
-import serviceApi from "../service/serviceApi";
+import axiosHttpUtil from '../service/axiosHttpUtils';
+import serviceApi from '../service/serviceApi';
 
 /**
  * @method 登录
@@ -17,22 +17,28 @@ function login(data) {
 }
 /**
  * @method:  退出
- * @param {*} 
+ * @param {*}
  * @return {*} 返回promise对象
  */
 function loginOut() {
   return axiosHttpUtil(serviceApi.logout);
 }
 /**
- * @method: 
+ * @method:
  * @param {*}
  * @return {*}
  */
 function updatePwd(data) {
   return axiosHttpUtil(serviceApi.updatePwd, data);
 }
-export default {
+
+function getSysLogData(data) {
+  return axiosHttpUtil(serviceApi.syslog, data);
+}
+
+export {
   login,
   loginOut,
-  updatePwd
-}
+  updatePwd,
+  getSysLogData
+};

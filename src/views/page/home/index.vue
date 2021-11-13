@@ -1,8 +1,8 @@
 <!--
  * @Author: mujin
  * @Date: 2021-08-10 21:13:04
- * @LastEditTime: 2021-10-01 14:17:22
- * @Description: 
+ * @LastEditTime: 2021-11-13 14:56:41
+ * @Description:
 -->
 <template>
   <div class="home-content">
@@ -14,23 +14,33 @@
 </template>
 
 <script>
+import * as API from '../../../api/api';
 export default {
   data() {
     return {
       tableData: []
-    }
+    };
   },
   mounted() {
     this.init();
   },
   methods: {
     init() {
-      for (let i = 0; i < 100; i++) {
-        this.tableData.push('dadadad' + i);
-      }
+      const param = {
+        pageNo: 1,
+        pageSize: 10,
+        search: {
+          operation_time: null
+        }
+      };
+      API.getSysLogData(param).then(res => {
+        // console.log(res);
+      }).catch(err => {
+        console.log(err);
+      });
     }
-  },
-}
+  }
+};
 </script>
 
 <style>

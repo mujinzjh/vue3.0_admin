@@ -1,3 +1,9 @@
+/*
+ * @Author: mujin
+ * @Date: 2021-08-08 21:39:54
+ * @LastEditTime: 2021-11-13 15:41:44
+ * @Description: store,
+ */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -36,8 +42,8 @@ import i18n from './locale';
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
-    router,
     store,
+    router,
     i18n,
     components: { App },
     template: '<App/>'

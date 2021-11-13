@@ -166,7 +166,13 @@ export default {
           this.$store
             .dispatch('login', this.formInline)
             .then((res) => {
-              this.$router.push('/index');
+              if (res.code == '200') {
+                const defaultRouter = Object.values(res.result.menu)[0].permission;
+                this.$router.push({ name: defaultRouter });
+              } else {
+                this.$Message.error(res.desc);
+              }
+
             })
             .catch((err) => { });
         } else {

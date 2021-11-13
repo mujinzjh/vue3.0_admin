@@ -17,6 +17,20 @@ function isAccess(name, access, routerArray) {
     return routerPermissionJudge(routerArray);
 }
 
+function isAccessTo(name, routerArray) {
+    var routerPermissionJudge = (list) => {
+        return list.some(item => {
+            if (item.children && item.children.length) {
+                return routerPermissionJudge(item.children);
+            } else if (name === item.name) {
+                return true;
+            }
+        });
+    }
+    return routerPermissionJudge(routerArray);
+}
+
+
 /**
  * @method 是否拥有权限
  * @param {*} access 
@@ -41,5 +55,5 @@ function isCludesAccess(access, routeAccess) {
 }
 
 export default {
-    isAccess
+    isAccess,isAccessTo
 }

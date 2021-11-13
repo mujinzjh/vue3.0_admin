@@ -1,7 +1,7 @@
 <!--
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-10-29 14:18:53
+ * @LastEditTime: 2021-11-13 16:35:28
  * @Description:
 -->
 <template>
@@ -23,27 +23,27 @@
           :key="'item_' + index"
         >
           <Submenu
-            :name="item.name"
+            :name="item.permission"
             v-if="item.children && item.children.length"
           >
             <template slot="title">
-              <Icon :type="item.meta.icon"></Icon>
-              {{ item.meta.title }}
+              <Icon :type="item.icon"></Icon>
+              {{ item.name }}
             </template>
             <MenuItem
               v-for="(itemChild, index) in item.children"
               :key="'itemChild_' + index"
-              :name="itemChild.name"
+              :name="itemChild.permission"
             >
-            {{ itemChild.meta.title }}
+            {{ itemChild.name }}
             </MenuItem>
           </Submenu>
           <MenuItem
             v-else
-            :name="item.name"
+            :name="item.permission"
           >
-          <Icon :type="item.meta.icon" />
-          {{ item.meta.title }}
+          <Icon :type="item.icon" />
+          {{ item.name}}
           </MenuItem>
         </div>
       </Menu>
@@ -52,14 +52,15 @@
 </template>
 
 <script>
+import { mapGetters } from '_vuex@3.6.2@vuex';
 export default {
-  data () {
+  data() {
     return {
-      openName: []
+      openName: [],
     };
   },
-  created () {
-    this.isIncludeOpen();
+  created() {
+    // this.isIncludeOpen();
   },
   methods: {
     /**
@@ -67,7 +68,7 @@ export default {
      * @param {*}
      * @return {*}
      */
-    isIncludeOpen () {
+    isIncludeOpen() {
       const path = this.$route.path;
       const openName = JSON.parse(sessionStorage.getItem('openName'));
       const openValue = openName && openName[0];
@@ -80,19 +81,20 @@ export default {
     /**
      * @method 菜单路由跳转
      */
-    navigateTo (name) {
+    navigateTo(name) {
       this.$router.push({ name });
     },
-    onOpenChange (value) {
+    onOpenChange(value) {
       this.openName = value;
       sessionStorage.setItem('openName', JSON.stringify(value));
     }
   },
   computed: {
-    menus () {
-      return this.$router.options.routes[1].children;
+    'menus': function () {
+      console.log(this.$store.state.menus);
+      return this.$store.state.menus;
     },
-    activeName () {
+    activeName() {
       return this.$route.name;
     }
   }

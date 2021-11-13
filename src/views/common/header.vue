@@ -14,7 +14,7 @@
       />
       <Dropdown @on-click="onDropClick">
         <a href="javascript:void(0)">
-          {{ userName }}
+          {{userInfo.username }}
           <Icon type="ios-arrow-down"></Icon>
         </a>
         <Dropdown-menu slot="list">
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import API from '@/api/api.js'
+import * as API from '@/api/api.js'
 import CustomModal from '@/components/modalCom.vue'
 import utils from '@/utils/utils.js'
 export default {
@@ -109,14 +109,25 @@ export default {
     projectName() {
       return window.$baseConfig.project_name;
     },
-    userName() {
-      return "zhaojianhua";
+    userInfo() {
+      return utils.getSessionItem('userInfo');
     },
     ImgSrc() {
-      return JSON.parse(utils.getSessionItem('userInfo')).avatar;
+      return '';
     }
   },
+  mounted() {
+    EventBus.$on('logout', this.timeOutLogOut);
+  },
+  beforeDestroy() {
+    EventBus.$off('logout');
+  },
   methods: {
+    timeOutLogOut() {
+      this.$Message.warning('登录超时，请再次登录！');
+      this.$router.push('/');
+      sessionStorage.clear();
+    },
     /**
      * @method: 
      * @param {*}
@@ -141,10 +152,20 @@ export default {
      * @method: 修改密码
      * @param {*}
      * @return {*}
-     */    
+     */
     onChangePwd() {
-      API.updatePwd({ password: this.formData.newPwd }).then(res => {
-        console.log(res);
+      const param = {
+        oldPwd: this.formData.oldPwd,
+        password: this.formData.newPwd
+      }
+      API.updatePwd(param).then(res => {
+        if (res.code == '200') {
+          this.$router.push('/');
+          sessionStorage.clear();
+          this.$Message.success('修改密码成功,请重新登录')
+        } else {
+          this.$Message.error('修改密码失败，请重试')
+        }
       }).catch(err => {
         console.log(err);
       })
@@ -181,9 +202,9 @@ export default {
      */
     onLogOutFun() {
       API.loginOut().then(res => {
-        console.log(res);
-        if (res.code === 200 && res.msg === 'success') {
+        if (res.code == 200) {
           this.$router.push('/');
+          sessionStorage.clear();
           this.$Message.success('退出系统成功');
         } else {
           this.$Message.error('退出系统失败');
