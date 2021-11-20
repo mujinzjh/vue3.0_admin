@@ -9,7 +9,7 @@ import axios from 'axios';
 import utils from '../utils/utils';
 import store from '../store/index';
 import qs from 'qs';
-import Constans from '../config/constans';
+import Constants from '../config/constants';
 
 axios.interceptors.request.use(config => {
   const token = utils.getSessionItem('token');
@@ -75,7 +75,7 @@ const isParamsVaild = (params) => {
 };
 
 function axiosHttpUtils(opts, data) {
-  let baseURL = opts.baseURL || Constans.BASE_URL, promise;
+  let baseURL = opts.baseURL || Constants.BASE_URL, promise;
   const httpDefaultOpts = handleOptions(opts, baseURL, data);
 
   promise = new Promise((resolve, reject) => {

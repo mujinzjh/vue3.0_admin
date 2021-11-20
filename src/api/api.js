@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-09-13 23:48:59
- * @LastEditTime: 2021-11-09 15:27:29
+ * @LastEditTime: 2021-11-17 16:49:12
  * @Description:
  */
 import axiosHttpUtil from '../service/axiosHttpUtils';
@@ -36,9 +36,28 @@ function getSysLogData(data) {
   return axiosHttpUtil(serviceApi.syslog, data);
 }
 
+function getRoleListData(data) {
+  return axiosHttpUtil(serviceApi.roleList, data);
+}
+
+function delRoleInfo(data) {
+  return axiosHttpUtil(serviceApi.delRoleInfo, data);
+}
+
+
+function getMenuData(data) {
+  return axiosHttpUtil(serviceApi.getMenuData, data)
+}
+
+function addRole(data) {
+  return axiosHttpUtil(serviceApi.addRole, data);
+}
 export {
   login,
   loginOut,
   updatePwd,
-  getSysLogData
+  getSysLogData,
+  getRoleListData, delRoleInfo,
+  getMenuData,
+  addRole
 };

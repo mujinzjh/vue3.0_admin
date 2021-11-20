@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-11-13 16:53:18
+ * @LastEditTime: 2021-11-17 16:56:58
  * @Description: 
  */
 
@@ -11,12 +11,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Constans from '@/config/constans.js';
+import Constants from '@/config/constants.js';
 
 import Utils from "@/utils/utils.js";
 import RouterUtils from '@/config/utils'
-const accessList = Constans.accessList; //获取权限列表，
+const accessList = Constants.accessList; //获取权限列表，
 
+const originalPush = Router.prototype.push
+
+Router.prototype.push = function push(location, onResolve, onReject) {
+
+    if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+
+    return originalPush.call(this, location).catch(err => err)
+
+}
 
 
 Vue.use(Router)

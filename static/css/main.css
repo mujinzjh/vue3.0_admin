@@ -32,3 +32,9 @@ body,
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4);
 }
+
+.page-c {
+  display: flex;
+  justify-content: flex-end;
+  margin: 16px 0;
+}

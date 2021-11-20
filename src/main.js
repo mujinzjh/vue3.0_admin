@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-11-13 15:41:44
+ * @LastEditTime: 2021-11-16 11:24:01
  * @Description: store,
  */
 // The Vue build version to load with the `import` command
@@ -16,6 +16,7 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import '../static/css/main.css';
 // import "@/assets/theme/t.less ";
+// import '../static/style/common.less'
 
 //引入工具方法
 import utils from "./utils/utils";

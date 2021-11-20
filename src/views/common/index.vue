@@ -51,6 +51,7 @@ export default {
   .main-wrap-content {
     background: #fff;
     margin: 16px 0;
+    padding: 16px;
   }
 }
 
