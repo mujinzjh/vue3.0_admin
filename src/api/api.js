@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-09-13 23:48:59
- * @LastEditTime: 2021-11-17 16:49:12
+ * @LastEditTime: 2021-12-18 15:22:31
  * @Description:
  */
 import axiosHttpUtil from '../service/axiosHttpUtils';
@@ -52,6 +52,14 @@ function getMenuData(data) {
 function addRole(data) {
   return axiosHttpUtil(serviceApi.addRole, data);
 }
+
+function getRoleDataInfo(data) {
+  return axiosHttpUtil(serviceApi.getRoleInfo, data);
+}
+
+function getUserList(data) {
+  return axiosHttpUtil(serviceApi.getUserList, data);
+}
 export {
   login,
   loginOut,
@@ -59,5 +67,7 @@ export {
   getSysLogData,
   getRoleListData, delRoleInfo,
   getMenuData,
-  addRole
+  addRole,
+  getRoleDataInfo,
+  getUserList
 };

@@ -167,6 +167,7 @@ export default {
             .dispatch('login', this.formInline)
             .then((res) => {
               if (res.code == '200') {
+                debugger
                 const defaultRouter = Object.values(res.result.menu)[0].permission;
                 this.$router.push({ name: defaultRouter });
               } else {
@@ -192,7 +193,7 @@ export default {
   width: 100%;
   height: 100%;
   .login-bg {
-    background-image: url('../../../assets/img/2.jpg');
+    background-image: url('../../../assets/img/bg.jpg');
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;

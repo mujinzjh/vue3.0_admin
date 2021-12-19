@@ -1,7 +1,7 @@
 <!--
  * @Author: mujin
  * @Date: 2021-11-13 16:30:14
- * @LastEditTime: 2021-11-17 17:17:44
+ * @LastEditTime: 2021-11-21 14:05:39
  * @Description: 
 -->
 <template>
@@ -30,7 +30,6 @@
     <Modal
       v-model="modal1"
       title="普通的Modal对话框标题"
-      @on-check-change="onCheckChange"
       @on-ok="ok"
       @on-cancel="cancel"
     >
@@ -39,6 +38,7 @@
         :data="menuData"
         ref="treeRef"
         show-checkbox
+        @on-check-change="onCheckChange"
       ></Tree>
     </Modal>
   </div>
@@ -142,10 +142,49 @@ export default {
 
     },
     onEditClick(row) {
-      console.log(row);
+      API.getRoleDataInfo({ roleId: row.id }).then(res => {
+        if (res.code == '200') {
+          this.name = res.result.name;
+          this.setTreeData(this.menuData, res.result.menuIds.split(','));
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+      this.modal1 = true;
+    },
+
+    setTreeData(menuList, menuIdList) {
+      for (let i = 0; i < menuIdList.length; i++) {
+        for (let j = 0; j < menuList.length; j++) {
+          if (menuList[j].children) {
+            menuList[j].checked = false;
+            this.setTreeData(menuList[j].children, menuIdList);
+          } else if (menuList[j].id == menuIdList[i]) {
+            menuList[j].checked = true;
+          }
+        }
+      }
+      // for (let i = 0; i < menuIdList.length; i++) {
+      //   this.setTree(this.menuData, menuIdList[i])
+      // }
+      // console.log(this.menuData);
+    },
+    setTree(menuList, i) {
+      for (let j = 0; j < menuList.length; j++) {
+        if (menuList[j].pid == i) {
+          menuList.checked = false
+        }
+        if (menuList[j].id == i) {
+          return menuList.checked = true
+        } else if (menuList.children) {
+          this.setTree(menuList.children, i);
+        }
+
+      }
     },
     cancel() {
       this.modal1 = false;
+      this.getMenuTree();
     },
     onAddClick() {
       this.modal1 = true;
@@ -163,6 +202,7 @@ export default {
       for (let i = 0; i < data.length; i++) {
         data[i].title = data[i].name;
         data[i].expand = true;
+        data[i].checked = false;
         if (data[i].children && data[i].children.length) {
           this.setMenuData(data[i].children);
         }

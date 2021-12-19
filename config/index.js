@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-11-13 14:37:03
+ * @LastEditTime: 2021-12-18 15:26:48
  * @Description: 
  */
 'use strict'
@@ -18,7 +18,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://127.0.0.1:8080/',   // target表示代理的服务器url
+        target: 'http://127.0.0.1:8089/',   // target表示代理的服务器url
         pathRewrite: {     // pathRewrite表示路径重写，key表示一个正则，value表示别名 
           '^/api': '/'   // 即用 '/api'表示'http://localhost:3000/api'
         }

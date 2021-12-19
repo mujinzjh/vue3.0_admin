@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-09-13 23:47:10
- * @LastEditTime: 2021-11-17 16:48:21
+ * @LastEditTime: 2021-12-18 15:21:46
  * @Description: 接口配置文件
  */
 
@@ -49,6 +49,14 @@ const serviceApi = {
       'Content-Type': 'application/json;charset=UTF-8'
     }
   },
+  'getRoleInfo': {
+    url: '/hms/role/info',
+    method: 'get',
+    header: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  },
   'delRoleInfo': {
     url: '/hms/role/del',
     method: 'delete',
@@ -67,6 +75,14 @@ const serviceApi = {
   },
   'getMenuData': {
     url: '/hms/role/getAllPermissionMenus',
+    method: 'get',
+    header: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  },
+  'getUserList': {
+    url: '/hms/user/list',
     method: 'get',
     header: {
       'Accept': 'application/json',
