@@ -1,0 +1,30 @@
+{
+  "id": "3029629",
+  "name": "HMS",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8441586",
+      "name": "系统管理",
+      "font_class": "ziyuanxhdpi",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "20853344",
+      "name": "日志管理",
+      "font_class": "rizhiguanli",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
+      "icon_id": "9839295",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    }
+  ]
+}

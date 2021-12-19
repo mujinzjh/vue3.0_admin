@@ -1,7 +1,7 @@
 <!--
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-11-13 16:35:28
+ * @LastEditTime: 2021-12-19 22:38:57
  * @Description:
 -->
 <template>
@@ -27,7 +27,10 @@
             v-if="item.children && item.children.length"
           >
             <template slot="title">
-              <Icon :type="item.icon"></Icon>
+              <i
+                class="iconfont"
+                :class="item.icon"
+              ></i>
               {{ item.name }}
             </template>
             <MenuItem
@@ -42,7 +45,10 @@
             v-else
             :name="item.permission"
           >
-          <Icon :type="item.icon" />
+          <i
+            class="iconfont"
+            :class="item.icon"
+          ></i>
           {{ item.name}}
           </MenuItem>
         </div>
@@ -113,6 +119,11 @@ export default {
     background: #333 !important;
     color: @fontColor;
     height: 100%;
+    .ivu-menu-submenu {
+      .ivu-menu-item {
+        padding-left: 53px !important;
+      }
+    }
   }
   /deep/
     .ivu-menu-light.ivu-menu-vertical

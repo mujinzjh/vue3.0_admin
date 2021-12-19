@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-09-13 17:01:28
- * @LastEditTime: 2021-11-13 16:58:01
+ * @LastEditTime: 2021-12-19 22:35:19
  * @Description: axios封装的配置文件
  */
 import Crypto from "crypto-js/crypto-js";
@@ -82,32 +82,32 @@ utils.prototype = {
     const value = this.decrypt(sessionStorage.getItem(key), 'a1b2c3d4e5f6g7h8');
     return JSON.parse(value);
   },
-  isAccessTo(menuList, name) {
-    let result = false;
-    for (let i = 0; i < menuList.length; i++) {
-      if (name == menuList[i].permission || name == "index") {
-        result = true;
-        break;
-      } else if (menuList[i].children && menuList[i].children.length) {
-        return this.isAccessTo(menuList[i].children, name);
-      } else {
-        continue;
-      }
-    }
-    return result;
-  },
-  // isAccessTo(routerArray, name) {
-  //   var routerPermissionJudge = (list) => {
-  //     return list.some(item => {
-  //       if (item.children && item.children.length) {
-  //         return routerPermissionJudge(item.children);
-  //       } else if (name === item.name || name == 'index') {
-  //         return true;
-  //       }
-  //     });
+  // isAccessTo(menuList, name) {
+  //   let result = false;
+  //   for (let i = 0; i < menuList.length; i++) {
+  //     if (name == menuList[i].permission || name == "index") {
+  //       result = true;
+  //       break;
+  //     } else if (menuList[i].children && menuList[i].children.length) {
+  //       return this.isAccessTo(menuList[i].children, name);
+  //     } else {
+  //       continue;
+  //     }
   //   }
-  //   return routerPermissionJudge(routerArray);
-  // }
+  //   return result;
+  // },
+  isAccessTo(routerArray, name) {
+    var routerPermissionJudge = (list) => {
+      return list.some(item => {
+        if (item.children && item.children.length) {
+          return routerPermissionJudge(item.children);
+        } else if (name === item.permission || name == 'index') {
+          return true;
+        }
+      });
+    }
+    return routerPermissionJudge(routerArray);
+  }
 }
 
 export default new utils();

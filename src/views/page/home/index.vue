@@ -1,7 +1,7 @@
 <!--
  * @Author: mujin
  * @Date: 2021-08-10 21:13:04
- * @LastEditTime: 2021-11-13 14:56:41
+ * @LastEditTime: 2021-12-19 21:45:22
  * @Description:
 -->
 <template>
@@ -30,7 +30,8 @@ export default {
         pageNo: 1,
         pageSize: 10,
         search: {
-          operation_time: null
+          operation_time: null,
+          status: 1
         }
       };
       API.getSysLogData(param).then(res => {

@@ -1,7 +1,7 @@
 /*
  * @Author: mujin
  * @Date: 2021-08-08 21:39:54
- * @LastEditTime: 2021-11-17 16:56:58
+ * @LastEditTime: 2021-12-19 22:26:58
  * @Description: 
  */
 
@@ -102,6 +102,22 @@ const route = [{
             path: '/systemManager/roleManager',
             name: 'roleManager',
             component: resolve => require(['@/views/page/systemManger/roleList.vue'], resolve),
+        }
+        ]
+    },
+    {
+        path: '/logManager',
+        name: 'logManager',
+        component: resolve => require(['@/views/page/logManager/index.vue'], resolve),
+        children: [{
+            path: '/logManager/operationManager',
+            name: 'operationManager',
+            component: resolve => require(['@/views/page/logManager/operation.vue'], resolve),
+        },
+        {
+            path: '/logManager/loginLog',
+            name: 'loginLog',
+            component: resolve => require(['@/views/page/logManager/log.vue'], resolve),
         }
         ]
     },

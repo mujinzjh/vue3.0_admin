@@ -1,7 +1,7 @@
 <!--
  * @Author: mujin
  * @Date: 2021-11-13 16:30:14
- * @LastEditTime: 2021-11-21 14:05:39
+ * @LastEditTime: 2021-12-19 22:42:20
  * @Description: 
 -->
 <template>
@@ -63,8 +63,8 @@ export default {
       columns: [
         {
           type: 'index',
-          width: 60,
-          title: ' ',
+          width: 80,
+          title: '序号',
           align: 'center'
         },
         {

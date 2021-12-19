@@ -1,7 +1,7 @@
 <!--
  * @Author: mujin
  * @Date: 2021-11-13 16:30:14
- * @LastEditTime: 2021-12-18 15:43:09
+ * @LastEditTime: 2021-12-19 22:46:32
  * @Description: 
 -->
 <template>
@@ -27,20 +27,6 @@
       :page-size-opts="pageSizeOpt"
     ></Page>
 
-    <Modal
-      v-model="modal1"
-      title="普通的Modal对话框标题"
-      @on-ok="ok"
-      @on-cancel="cancel"
-    >
-      <Input v-model="name"></Input>
-      <Tree
-        :data="menuData"
-        ref="treeRef"
-        show-checkbox
-        @on-check-change="onCheckChange"
-      ></Tree>
-    </Modal>
   </div>
 </template>
 
@@ -63,13 +49,17 @@ export default {
       columns: [
         {
           type: 'index',
-          width: 60,
-          title: ' ',
+          width: 80,
+          title: '序号',
           align: 'center'
         },
         {
           title: '姓名',
-          key: 'name'
+          key: 'username'
+        },
+        {
+          title: '角色名称',
+          key: 'roleName'
         },
         {
           title: '创建时间',
@@ -119,7 +109,7 @@ export default {
         pageNo: index || this.pageObj.pageNo,
         pageSize: this.pageObj.pageSize,
         search: {
-          name: 'admin'
+          name: ''
         }
       }
       API.getUserList(param).then(res => {
@@ -132,7 +122,10 @@ export default {
       }).catch(err => {
         console.log(err);
       })
-    }
+    },
+    onPageChange() { },
+    onPageSizeChange() { },
+    onAddClick() { }
   },
 }
 </script>

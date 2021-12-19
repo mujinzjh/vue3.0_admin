@@ -167,7 +167,6 @@ export default {
             .dispatch('login', this.formInline)
             .then((res) => {
               if (res.code == '200') {
-                debugger
                 const defaultRouter = Object.values(res.result.menu)[0].permission;
                 this.$router.push({ name: defaultRouter });
               } else {
