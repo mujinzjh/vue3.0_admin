@@ -59,6 +59,7 @@
       class="lizi login-bg"
     >
     </vue-particles>
+    <a href="mailto:zhaojianhua@xdja.com">ceshi</a>
   </div>
 </template>
 
